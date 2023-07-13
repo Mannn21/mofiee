@@ -1,10 +1,10 @@
 const Hero = () => {
 	return (
-		<div className="carousel w-full">
-			<div id="slide1" className="carousel-item relative w-full">
+		<div className="carousel w-full h-3/5">
+			<div id="slide1" className="carousel-item relative w-full overflow-hidden">
 				<img
-					src="/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
-					className="w-full"
+					src="https://image.tmdb.org/t/p/original/1E5baAaEse26fej7uHcjOgEE2t2.jpg"
+					className="w-full h-screen"
 				/>
 				<div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
 					<a href="#slide4" className="btn btn-circle">
