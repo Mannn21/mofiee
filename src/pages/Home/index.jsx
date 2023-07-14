@@ -1,11 +1,13 @@
-import Hero from "../../components/Hero"
+import Navbar from "../../components/Navbar";
+import ListMovie from "../../components/ListMovie";
 
 const Home = () => {
-    return (
-        <div className="w-screen h-screen">
-            <Hero />
-        </div>
-    )
-}
+	return (
+		<div>
+			<Navbar />
+            <ListMovie />
+		</div>
+	);
+};
 
-export default Home
+export default Home;

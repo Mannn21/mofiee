@@ -10,3 +10,14 @@ body
     box-sizing: border-box;
     background-color: #191725;
 }
+
+
+.content {
+    height: 250vh;
+    position: relative;
+    background-image: url("/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+

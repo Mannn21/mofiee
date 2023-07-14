@@ -1,11 +1,14 @@
-import Home from "./pages/Home"
+import Home from "./pages/Home";
+import "./index.css";
 
 const App = () => {
-    return (
-        <div>
-            <Home />
-        </div>
-    )
-}
+	return (
+		<div>
+			<div className="content">
+				<Home />
+			</div>
+		</div>
+	);
+};
 
-export default App
+export default App;
