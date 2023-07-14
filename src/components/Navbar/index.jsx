@@ -3,10 +3,11 @@ import { useState } from "react"
 const Navbar = () => {
 	const [query, setQuery] = useState("")
 
-	console.log(query)
+	// console.log(query)
 
 	return (
 		<div className="navbar text-white bg-transparent flex justify-between">
+			{query}
 			<div>
 				<a className="btn btn-ghost normal-case text-3xl">Mofiee Apps</a>
 			</div>

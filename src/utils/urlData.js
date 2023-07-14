@@ -1,18 +1,18 @@
-export const URL = {
+export const URL = [
     {
         filter: 'All Movies',
-        url: 
+        path: `${import.meta.env.VITE_APP_BASE_URL}/movie/changes`
     },
     {
         filter: 'Trending',
-        url: 
+        path: `${import.meta.env.VITE_APP_BASE_URL}/movie/popular`
     },
     {
         filter: 'Top Rated',
-        url: 
+        path: `${import.meta.env.VITE_APP_BASE_URL}/movie/top_rated`
     },
     {
         filter: 'Up Coming',
-        url: 
+        path: `${import.meta.env.VITE_APP_BASE_URL}/movie/upcoming`
     },
-}
+]
