@@ -1,13 +1,12 @@
-import { useState } from "react"
+import PropTypes from "prop-types"
 
-const Navbar = () => {
-	const [query, setQuery] = useState("")
-
-	// console.log(query)
+const Navbar = ({setQuery}) => {
+	const handleQuery = e => {
+		setQuery(e)
+	}
 
 	return (
 		<div className="navbar text-white bg-transparent flex justify-between">
-			{query}
 			<div>
 				<a className="btn btn-ghost normal-case text-3xl">Mofiee Apps</a>
 			</div>
@@ -15,7 +14,7 @@ const Navbar = () => {
 				<div className="form-control">
 					<input
 						type="text"
-						onChange={e => setQuery(e.target.value)}
+						onChange={e => handleQuery(e.target.value)}
 						placeholder="Search movie"
 						className="input input-bordered bg-white w-64 h-9 tracking-wide mx-4 text-base-300"
 					/>
@@ -23,6 +22,9 @@ const Navbar = () => {
 			</div>
 		</div>
 	);
+};
+Navbar.propTypes = {
+	setQuery: PropTypes.func.isRequired,
 };
 
 export default Navbar;

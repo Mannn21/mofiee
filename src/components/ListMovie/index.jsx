@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
-import { getGenres, getData } from "../../utils/getData";
+import React, { Suspense, useEffect, useState } from "react";
+import { getGenres, getData, searchMovie } from "../../utils/getData";
+import Skeleton from "../Skeleton"
 import PropTypes from "prop-types";
 
-const ListMovie = ({ data }) => {
+const Card = React.lazy(() => import("../Card"))
+
+const ListMovie = ({ data, query }) => {
 	const [movies, setMovies] = useState([]);
 	const [genresMovie, setGenres] = useState([]);
 
@@ -33,10 +36,23 @@ const ListMovie = ({ data }) => {
 				console.error("Error while fetching movies:", error);
 			}
 		};
-		fetchData();
-	}, [data]);
 
-	// console.log(movies);
+		const fetchQuery = async () => {
+			try {
+				const response = await searchMovie(query);
+				setMovies(response.results);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		if (query.length === 0) {
+			fetchData();
+		}
+		if (query.length >= 3) {
+			fetchQuery();
+		}
+	}, [data, query]);
 
 	return (
 		<div className="flex flex-row gap-8 flex-wrap justify-center">
@@ -51,34 +67,9 @@ const ListMovie = ({ data }) => {
 						<div
 							key={index}
 							className="flex flex-col gap-1 items-center w-64 h-auto pb-2 rounded-md shadow-slate-700 shadow-md cursor-pointer">
-							<div className="flex justify-center w-full">
-								<img
-									src={`${import.meta.env.VITE_APP_IMAGE_URL}/${
-										movie.poster_path
-									}`}
-									alt={movie.title}
-								/>
-							</div>
-							<div className="flex flex-col gap-2 w-full h-auto px-2">
-								<div className="flex flex-row justify-between">
-									<span className="text-yellow-500 text-xl">★★★★★</span>
-									<span>
-										{movie.genre_ids && !movie.genres
-											? movie.genre_ids
-													.slice(0, 1)
-													.map(
-														item =>
-															genresMovie.find(genre => genre.id === item)?.name
-													)
-											: movie.genres.slice(0, 1).map(item => item.name)}
-									</span>
-								</div>
-								<div className="text-center">
-									<span className="text-white text-lg tracking-wider">
-										{movie.title}
-									</span>
-								</div>
-							</div>
+							<Suspense fallback={<Skeleton />}>
+								<Card movie={movie} genresMovie={genresMovie} />
+							</Suspense>
 						</div>
 					);
 				} else {
@@ -91,6 +82,10 @@ const ListMovie = ({ data }) => {
 
 ListMovie.propTypes = {
 	data: PropTypes.string.isRequired,
+};
+
+ListMovie.propTypes = {
+	query: PropTypes.string.isRequired,
 };
 
 export default ListMovie;

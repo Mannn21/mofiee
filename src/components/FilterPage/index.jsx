@@ -3,6 +3,7 @@ import { Icon } from "../../utils/iconFilter";
 import PropTypes from "prop-types"
 
 const FilterPage = ( {setData} ) => {
+	
 	const handleFilter = e => {
 		setData(e)
 	}
