@@ -1,8 +1,27 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Card = ({ movie, genresMovie }) => {
+	const [id, setId] = useState(null)
+	const navigate = useNavigate();
+
+	const handleId = e => {
+		setId(e)
+	}
+
+	useEffect(() => {
+		const handlePage = (id) => {
+			navigate(`/detail/${id}`)
+		}
+
+		if(id !== null) {
+			handlePage(id)
+		}
+	}, [id, navigate]);
+	
 	return (
-		<>
+		<div onClick={() => handleId(movie.id)}>
 			<div className="flex justify-center w-full">
 				<img
 					src={`${import.meta.env.VITE_APP_IMAGE_URL}/${movie.poster_path}`}
@@ -28,12 +47,13 @@ const Card = ({ movie, genresMovie }) => {
 					</span>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
 Card.propTypes = {
 	movie: PropTypes.shape({
+		id: PropTypes.number.isRequired,
 		poster_path: PropTypes.string.isRequired,
 		title: PropTypes.string.isRequired,
 		genre_ids: PropTypes.arrayOf(PropTypes.number).isRequired,
