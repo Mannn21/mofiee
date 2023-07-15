@@ -19,12 +19,12 @@ const Card = ({ movie, genresMovie }) => {
 			handlePage(id)
 		}
 	}, [id, navigate]);
-	
+
 	return (
 		<div onClick={() => handleId(movie.id)}>
 			<div className="flex justify-center w-full">
 				<img
-					src={`${import.meta.env.VITE_APP_IMAGE_URL}/${movie.poster_path}`}
+					src={`${import.meta.env.VITE_APP_POSTER_URL}/${movie.poster_path}`}
 					alt={movie.title}
 				/>
 			</div>
