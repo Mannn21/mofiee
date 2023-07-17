@@ -40,7 +40,7 @@ export const searchMovie = async query => {
 				import.meta.env.VITE_APP_API_KEY
 			}`,
 		});
-		return response.data;
+		return response.data.results;
 	} catch (error) {
 		console.error("Error while fetching movies:", error);
 		throw error;
