@@ -10,45 +10,20 @@ export const getMovieById = async id => {
 		},
 	});
 	return movieResponse.data;
-}
+}; 
 
-export const getData = async filter => {
+export const getData = async (filter, page) => {
 	const inFilter = URL?.find(item => item.filter === filter)?.path;
 	try {
-		if (filter === "All Movies") {
-			const response = await axios({
-				method: "GET",
-				url: inFilter,
-				headers: {
-					Authorization: `Bearer ${import.meta.env.VITE_APP_API_TOKEN}`,
-				},
-			});
-			const moviePromises = await response.data.results.map(async (item) => {
-        if (item.id !== null) {
-          const movieResponse = await axios({
-            method: "GET",
-            url: `https://api.themoviedb.org/3/movie/${item.id}?language=en-US`,
-            headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_APP_API_TOKEN}`,
-            },
-          });
-          return movieResponse.data;
-        }
-      });
-      
-      const movies = await Promise.all(moviePromises);
-      return movies
-		} else {
-			const response = await axios({
-				method: "GET",
-				url: inFilter,
-				headers: {
-					Authorization: `Bearer ${import.meta.env.VITE_APP_API_TOKEN}`,
-				},
-			});
+		const response = await axios({
+			method: "GET",
+			url: `${inFilter}?page=${page}`,
+			headers: {
+				Authorization: `Bearer ${import.meta.env.VITE_APP_API_TOKEN}`,
+			},
+		});
 
-			return response.data;
-		}
+		return response.data.results;
 	} catch (error) {
 		console.error("Error while fetching movies:", error);
 		throw error;
@@ -63,9 +38,9 @@ export const searchMovie = async query => {
 				import.meta.env.VITE_APP_BASE_URL
 			}/search/movie?query=${query}&api_key=${
 				import.meta.env.VITE_APP_API_KEY
-			}`
+			}`,
 		});
-		return response.data
+		return response.data;
 	} catch (error) {
 		console.error("Error while fetching movies:", error);
 		throw error;

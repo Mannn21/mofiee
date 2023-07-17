@@ -4,7 +4,7 @@ import ListMovie from "../../components/ListMovie";
 import FilterPage from "../../components/FilterPage";
 
 const Home = () => {
-	const [filterData, setFilterData] = useState('All Movies')
+	const [filterData, setFilterData] = useState('Trending')
 	const [query, setQuery] = useState("")
 
 	const handleFilterData = e => {

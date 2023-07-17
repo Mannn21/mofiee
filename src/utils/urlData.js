@@ -1,9 +1,5 @@
 export const URL = [
     {
-        filter: 'All Movies',
-        path: `${import.meta.env.VITE_APP_BASE_URL}/movie/changes`
-    },
-    {
         filter: 'Trending',
         path: `${import.meta.env.VITE_APP_BASE_URL}/movie/popular`
     },

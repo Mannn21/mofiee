@@ -18,7 +18,6 @@ const Detail = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await getMovieById(id);
-			// console.log(response)
 			setMovie({
 				title: response.title,
 				genre: response.genres,

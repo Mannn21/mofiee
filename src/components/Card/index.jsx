@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
+import Star from "../Star";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Card = ({ movie, genresMovie }) => {
-	const [id, setId] = useState(null)
+	const [id, setId] = useState(null);
 	const navigate = useNavigate();
 
 	const handleId = e => {
-		setId(e)
-	}
+		setId(e);
+	};
 
 	useEffect(() => {
-		const handlePage = (id) => {
-			navigate(`/detail/${id}`)
-		}
+		const handlePage = id => {
+			navigate(`/detail/${id}`);
+		};
 
-		if(id !== null) {
-			handlePage(id)
+		if (id !== null) {
+			handlePage(id);
 		}
 	}, [id, navigate]);
 
@@ -30,7 +31,11 @@ const Card = ({ movie, genresMovie }) => {
 			</div>
 			<div className="flex flex-col gap-2 w-full h-auto px-2">
 				<div className="flex flex-row justify-between">
-					<span className="text-yellow-500 text-xl">★★★★★</span>
+					<span className="text-yellow-500 text-xl">
+						{
+							<Star stars={movie.vote_average / 2}/>
+						}
+					</span>
 					<span>
 						{movie.genre_ids && !movie.genres
 							? movie.genre_ids
@@ -58,6 +63,8 @@ Card.propTypes = {
 		title: PropTypes.string.isRequired,
 		genre_ids: PropTypes.arrayOf(PropTypes.number).isRequired,
 		genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+		vote_count: PropTypes.number.isRequired,
+		vote_average: PropTypes.number.isRequired
 	}).isRequired,
 };
 
