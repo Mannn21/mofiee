@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieById } from "../../utils/getData.js";
+import DetailMovie from "../../components/DetailMovie/index.jsx";
 
 const Detail = () => {
 	const [movie, setMovie] = useState({
@@ -9,9 +10,10 @@ const Detail = () => {
 		status: "",
 		poster: "",
 		background: "",
-		rate: null,
-		reviewer: null,
+		rate: 0,
+		reviewer: 0,
 		releaseDate: "",
+		overview: ""
 	});
 	const { id } = useParams();
 
@@ -27,35 +29,26 @@ const Detail = () => {
 				rate: response.vote_average,
 				reviewer: response.vote_count,
 				releaseDate: response.release_date,
+				overview: response.overview
 			});
 		};
 
 		fetchData();
 	}, [id]);
 
-	console.log(movie);
+	// console.log(movie);
 	return (
 		<div className="w-screen h-screen">
 			<div className="w-screen h-screen flex flex-row">
-				<div className="w-3/5 h-screen">
+				<div className="w-screen h-screen overflow-hidden z-0 absolute">
 					<img
 						src={`${import.meta.env.VITE_APP_IMAGE_URL}/${movie.background}`}
 						alt=""
-						className="image-full h-full"
+						className="bg-cover h-screen w-screen"
 					/>
 				</div>
-				<div className="w-2/5 h-screen">
-					<div className="flex flex-col gap-2 justify-center items-start px-10 w-full h-full border border-red-600">
-						<h1 className="text-white text-4xl">{movie.title}</h1>
-						<div className="flex flex-row gap-2 text-sm">
-							{movie?.genre.map((item, index) => (
-								<span key={index}>{item.name}</span>
-							))}
-						</div>
-						<span> {movie.rate}</span>
-						<span>{movie.reviewer}</span>
-						<span>{movie.releaseDate}</span>
-					</div>
+				<div className="z-10">
+					<DetailMovie movie={movie}/>
 				</div>
 			</div>
 		</div>

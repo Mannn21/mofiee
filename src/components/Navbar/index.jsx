@@ -8,7 +8,7 @@ const Navbar = ({setQuery}) => {
 	return (
 		<div className="navbar text-white bg-transparent flex justify-between">
 			<div>
-				<a className="btn btn-ghost normal-case text-3xl">Mofiee Apps</a>
+				<a className="btn btn-ghost normal-case text-3xl tracking-wide">Mofiee Cinema</a>
 			</div>
 			<div >
 				<div className="form-control">

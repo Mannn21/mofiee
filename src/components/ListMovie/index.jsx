@@ -47,11 +47,22 @@ const ListMovie = ({ data, query }) => {
 				}
 
 				if (response) {
-					const newMovies = response;
-					setMovies(prevMovies => [...prevMovies, ...newMovies]);
+					if(data === 'Up Coming') {
+						const currentDate = new Date()
 
-					if (newMovies.length < 20) {
-						setHasMore(false);
+						const upcomingMovies = response.filter(movie => {
+							const releaseDate = new Date(movie.release_date);
+							return releaseDate > currentDate;
+						});
+						setMovies(prevMovies => [...prevMovies, ...upcomingMovies])
+					}
+					else{
+						const newMovies = response;
+						setMovies(prevMovies => [...prevMovies, ...newMovies]);
+	
+						if (newMovies.length < 20) {
+							setHasMore(false);
+						}
 					}
 				}
 			} catch (error) {
